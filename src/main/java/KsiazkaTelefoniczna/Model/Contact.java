@@ -1,4 +1,4 @@
-package KsiazkaTelefoniczna.Entity;
+package KsiazkaTelefoniczna.Model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
