@@ -1,7 +1,7 @@
-package KsiazkaTelefoniczna.Services;
+package KsiazkaTelefoniczna.services;
 
-import KsiazkaTelefoniczna.Model.Contact;
-import KsiazkaTelefoniczna.Exception.NoContactFoundException;
+import KsiazkaTelefoniczna.model.Contact;
+import KsiazkaTelefoniczna.exception.NoContactFoundException;
 
 import java.util.List;
 import java.util.Map;

@@ -1,7 +1,7 @@
-package KsiazkaTelefoniczna.Services;
+package KsiazkaTelefoniczna.services;
 
-import KsiazkaTelefoniczna.Exception.NoContactFoundException;
-import KsiazkaTelefoniczna.Model.Contact;
+import KsiazkaTelefoniczna.exception.NoContactFoundException;
+import KsiazkaTelefoniczna.model.Contact;
 import org.assertj.core.api.ThrowableAssert;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtensionContext;
@@ -79,7 +79,6 @@ class TelephoneBookTest {
     }
 
     private static class MyProvider implements ArgumentsProvider {
-
         @Override
         public Stream<? extends Arguments> provideArguments(ExtensionContext extensionContext) {
             return Stream.of(
