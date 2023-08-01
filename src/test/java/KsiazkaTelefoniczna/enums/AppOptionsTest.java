@@ -1,9 +1,13 @@
 package KsiazkaTelefoniczna.enums;
 
+import org.assertj.core.api.ThrowableAssert;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import java.util.NoSuchElementException;
+
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class AppOptionsTest {
 
@@ -15,5 +19,17 @@ class AppOptionsTest {
 
         //then
         assertThat(result.getOptionIndex()).isEqualTo(value);
+    }
+
+    @ParameterizedTest
+    @ValueSource(ints = {-1000, -154, -5, -10, -2, -1, 5, 10, 100, 1000, 154})
+    void shouldThrowNoSuchElementExceptionForInvalidNumber(final int value){
+        //when
+        final ThrowableAssert.ThrowingCallable callable = () -> AppOptions.convertNumberToOption(value);
+
+        //then
+        assertThatThrownBy(callable)
+                .isInstanceOf(NoSuchElementException.class)
+                .hasMessage("Brak opcji o numerze: " + value);
     }
 }
