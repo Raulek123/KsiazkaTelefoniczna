@@ -32,4 +32,14 @@ class AppOptionsTest {
                 .isInstanceOf(NoSuchElementException.class)
                 .hasMessage("Brak opcji o numerze: " + value);
     }
+
+    @ParameterizedTest
+    @ValueSource(ints = {0, 1, 2, 3, 4})
+    void shouldReturnToStringForAppOptions(final int value) {
+        //when
+        final AppOptions result = AppOptions.convertNumberToOption(value);
+
+        //then
+        assertThat(result.toString()).isEqualTo(result.getOptionIndex() + " - " + result.getDescription());
+    }
 }
