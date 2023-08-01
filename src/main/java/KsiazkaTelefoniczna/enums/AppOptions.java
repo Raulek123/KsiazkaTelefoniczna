@@ -1,7 +1,9 @@
 package KsiazkaTelefoniczna.enums;
 
+import java.util.NoSuchElementException;
+
 enum AppOptions {
-    ADD(0, "Dodaj kontakt"),
+    ADD_CONTACT(0, "Dodaj kontakt"),
     FIND_BY_NAME(1, "Szukaj po nazwie"),
     FIND_BY_PHONE_NUMBER(2, "Szukaj po numerze telefonu"),
     REMOVAL(3, "Usuwanie"),
@@ -29,5 +31,18 @@ enum AppOptions {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public static AppOptions convertNumberToOption(int option) {
+        try {
+            return AppOptions.values()[option];
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new NoSuchElementException("Brak opcji o numerze: " + option);
+        }
+    }
+
+    @Override
+    public String toString() {
+        return optionIndex + " - " + description;
     }
 }
