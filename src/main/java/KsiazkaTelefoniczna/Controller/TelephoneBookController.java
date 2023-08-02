@@ -7,9 +7,9 @@ import KsiazkaTelefoniczna.services.TelephoneBook;
 import java.util.Scanner;
 
 public class TelephoneBookController {
-    private TelephoneBook teleBook = new TelephoneBook();
-    private Scanner sc = new Scanner(System.in);
-    private ConsolePrinter printer = new ConsolePrinter();
+    private final TelephoneBook teleBook = new TelephoneBook();
+    private final Scanner sc = new Scanner(System.in);
+    private final ConsolePrinter printer = new ConsolePrinter();
 
     public void loop() {
 
