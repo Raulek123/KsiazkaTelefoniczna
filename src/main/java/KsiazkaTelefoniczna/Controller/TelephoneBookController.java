@@ -3,9 +3,11 @@ package KsiazkaTelefoniczna.Controller;
 import KsiazkaTelefoniczna.enums.AppOptions;
 import KsiazkaTelefoniczna.io.ConsolePrinter;
 import KsiazkaTelefoniczna.io.Reader;
+import KsiazkaTelefoniczna.model.ContactEntity;
 import KsiazkaTelefoniczna.services.TelephoneBook;
 
 import java.util.InputMismatchException;
+import java.util.List;
 import java.util.NoSuchElementException;
 
 public class TelephoneBookController {
@@ -63,28 +65,38 @@ public class TelephoneBookController {
     }
 
     private void delete() {
-        printer.printLine("Wprowadź nazwę do usunięcia:");
+        printer.printLine("Podaj nazwę do usunięcia:");
         String name = reader.getString();
         teleBook.deletingContactByName(name);
         printer.printLine("Usunięto kontakt");
     }
 
     private void searchByTelephone() {
-        printer.printLine("Wprowadź numer telefonu kontaktu, którego szukasz:");
+        printer.printLine("Podaj numer telefonu albo jego fragment:");
         String number = reader.getString();
-        teleBook.searchContactByNameOrPhoneNumber(number);
+        List<ContactEntity> contacts = teleBook.searchContactByNameOrPhoneNumber(number);
+        if (contacts.isEmpty()){
+            printer.printLine("Nie znaleziono podanego kontaktu");
+        } else {
+            contacts.forEach(System.out::println);
+        }
     }
 
     private void searchByName() {
-        printer.printLine("Wprowadź nazwę kontaktu, którego szukasz");
+        printer.printLine("Podaj fragment nazwy, którego szukasz");
         String name = reader.getString();
-        teleBook.searchContactByNameOrPhoneNumber(name);
+        List<ContactEntity> contacts = teleBook.searchContactByNameOrPhoneNumber(name);
+        if (contacts.isEmpty()){
+            printer.printLine("Nie znaleziono podanego kontaktu");
+        } else {
+            contacts.forEach(System.out::println);
+        }
     }
 
     private void addContact() {
-        printer.printLine("Wprowadź nazwę kontaktu:");
+        printer.printLine("Podaj nazwę kontaktu:");
         String name = reader.getString();
-        printer.printLine("Wprowadź numer telefonu:");
+        printer.printLine("Podaj numer telefonu:");
         int number = reader.getInt();
         teleBook.addNewContact(name, number);
         printer.printLine("Dodano nowy kontakt");
