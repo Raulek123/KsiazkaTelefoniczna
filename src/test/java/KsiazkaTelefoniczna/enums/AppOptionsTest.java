@@ -12,7 +12,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 class AppOptionsTest {
 
     @ParameterizedTest
-    @ValueSource(ints = {0, 1, 2, 3, 4})
+    @ValueSource(ints = {1, 2, 3, 4, 5, 0})
     void shouldConvertNumberToCorrespondingOption(final int value) {
         //when
        final AppOptions result = AppOptions.convertNumberToOption(value);
@@ -22,7 +22,7 @@ class AppOptionsTest {
     }
 
     @ParameterizedTest
-    @ValueSource(ints = {-1000, -154, -5, -10, -2, -1, 5, 10, 100, 1000, 154})
+    @ValueSource(ints = {-1000, -154, -5, -10, -2, -1, 6, 10, 100, 1000, 154})
     void shouldThrowNoSuchElementExceptionForInvalidNumber(final int value){
         //when
         final ThrowableAssert.ThrowingCallable callable = () -> AppOptions.convertNumberToOption(value);
@@ -30,11 +30,11 @@ class AppOptionsTest {
         //then
         assertThatThrownBy(callable)
                 .isInstanceOf(NoSuchElementException.class)
-                .hasMessage("Brak opcji o numerze: " + value);
+                .hasMessage("Brak opcji o numerze: " + value + ", wprowadź prawidłową wartość");
     }
 
     @ParameterizedTest
-    @ValueSource(ints = {0, 1, 2, 3, 4})
+    @ValueSource(ints = {0, 1, 2, 3, 4, 5})
     void shouldReturnToStringForAppOptions(final int value) {
         //when
         final AppOptions result = AppOptions.convertNumberToOption(value);

@@ -23,7 +23,7 @@ public class TelephoneBookController {
     }
 
     private void showOptions() {
-        printer.printLine("\n Wybierz opcję:");
+        printer.printLine("\n >>> Wybierz opcje:");
         for (AppOptions value : AppOptions.values()) {
             System.out.println(value.toString());
         }
@@ -47,6 +47,7 @@ public class TelephoneBookController {
 
     private void executeOption(AppOptions options) {
        switch (options){
+           case PRINT_ALL_CONTACT -> printContact();
            case ADD_CONTACT -> addContact();
            case FIND_BY_NAME -> searchByName();
            case FIND_BY_PHONE_NUMBER -> searchByTelephone();
@@ -54,6 +55,11 @@ public class TelephoneBookController {
            case EXIT -> closeApp();
            default -> System.out.println("Nie ma takiej opcji, wprowadź ponownie");
        }
+    }
+
+    private void printContact() {
+        printer.printLine("Lista kontaktów:");
+        teleBook.printContact().forEach(System.out::println);
     }
 
     private void delete() {

@@ -3,11 +3,12 @@ package KsiazkaTelefoniczna.enums;
 import java.util.NoSuchElementException;
 
 public enum AppOptions {
-    ADD_CONTACT(0, "Dodaj kontakt"),
-    FIND_BY_NAME(1, "Szukaj po nazwie"),
-    FIND_BY_PHONE_NUMBER(2, "Szukaj po numerze telefonu"),
-    REMOVAL(3, "Usuwanie"),
-    EXIT(4, "Wyjście z programu");
+    EXIT(0, "Wyjście z programu"),
+    ADD_CONTACT(1, "Dodaj kontakt"),
+    PRINT_ALL_CONTACT(2, "Wyświetl wszystkie kontakty"),
+    FIND_BY_NAME(3, "Szukaj po nazwie"),
+    FIND_BY_PHONE_NUMBER(4, "Szukaj po numerze telefonu"),
+    REMOVAL(5, "Usuń kontakt");
 
     private int optionIndex;
     private String description;
@@ -37,7 +38,7 @@ public enum AppOptions {
         try {
             return AppOptions.values()[option];
         } catch (ArrayIndexOutOfBoundsException e) {
-            throw new NoSuchElementException("Brak opcji o numerze: " + option);
+            throw new NoSuchElementException("Brak opcji o numerze: " + option + ", wprowadź prawidłową wartość");
         }
     }
 
