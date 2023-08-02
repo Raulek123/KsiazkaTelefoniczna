@@ -1,7 +1,7 @@
 package KsiazkaTelefoniczna.services;
 
 import KsiazkaTelefoniczna.exception.NoContactFoundException;
-import KsiazkaTelefoniczna.model.Contact;
+import KsiazkaTelefoniczna.model.ContactEntity;
 import org.assertj.core.api.ThrowableAssert;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtensionContext;
@@ -23,14 +23,14 @@ class TelephoneBookTest {
     void shouldPrintAddedContactAfterAdding(final String name, final int number) {
         // given
         final TelephoneBook telephoneBook = new TelephoneBook();
-        final Contact contact = new Contact(name, number);
+        final ContactEntity contactEntity = new ContactEntity(name, number);
         telephoneBook.addNewContact(name, number);
 
         //when
-        final List<Contact> result = telephoneBook.printContact();
+        final List<ContactEntity> result = telephoneBook.printContact();
 
         //then
-        assertThat(result).containsExactlyInAnyOrder(contact);
+        assertThat(result).containsExactlyInAnyOrder(contactEntity);
     }
 
     @Test
@@ -52,14 +52,14 @@ class TelephoneBookTest {
     void shouldFindContactByName(final String name, final int number) {
         // given
         final TelephoneBook telephoneBook = new TelephoneBook();
-        final Contact contact = new Contact(name, number);
+        final ContactEntity contactEntity = new ContactEntity(name, number);
 
         //when
         telephoneBook.addNewContact(name, number);
-        final List<Contact> result = telephoneBook.searchContactByNameOrPhoneNumber(name);
+        final List<ContactEntity> result = telephoneBook.searchContactByNameOrPhoneNumber(name);
 
         //then
-        assertThat(result).containsExactlyInAnyOrder(contact);
+        assertThat(result).containsExactlyInAnyOrder(contactEntity);
     }
 
 
@@ -68,14 +68,14 @@ class TelephoneBookTest {
     void shouldFindContactByPhoneNumber(final String name, final int number) {
         // given
         final TelephoneBook telephoneBook = new TelephoneBook();
-        final Contact contact = new Contact(name, number);
+        final ContactEntity contactEntity = new ContactEntity(name, number);
 
         //when
         telephoneBook.addNewContact(name, number);
-        final List<Contact> result = telephoneBook.searchContactByNameOrPhoneNumber(Integer.toString(number));
+        final List<ContactEntity> result = telephoneBook.searchContactByNameOrPhoneNumber(Integer.toString(number));
 
         //then
-        assertThat(result).containsExactlyInAnyOrder(contact);
+        assertThat(result).containsExactlyInAnyOrder(contactEntity);
     }
 
     private static class MyProvider implements ArgumentsProvider {

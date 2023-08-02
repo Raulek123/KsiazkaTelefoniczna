@@ -2,7 +2,7 @@ package KsiazkaTelefoniczna.enums;
 
 import java.util.NoSuchElementException;
 
-enum AppOptions {
+public enum AppOptions {
     ADD_CONTACT(0, "Dodaj kontakt"),
     FIND_BY_NAME(1, "Szukaj po nazwie"),
     FIND_BY_PHONE_NUMBER(2, "Szukaj po numerze telefonu"),

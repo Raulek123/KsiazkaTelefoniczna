@@ -1,6 +1,6 @@
 package KsiazkaTelefoniczna.services;
 
-import KsiazkaTelefoniczna.model.Contact;
+import KsiazkaTelefoniczna.model.ContactEntity;
 import KsiazkaTelefoniczna.exception.NoContactFoundException;
 
 import java.util.List;
@@ -9,13 +9,13 @@ import java.util.TreeMap;
 import java.util.stream.Collectors;
 
 public class TelephoneBook {
-    private Map<String, Contact> contactsMap = new TreeMap<>();
+    private Map<String, ContactEntity> contactsMap = new TreeMap<>();
 
     public void addNewContact(String name, int phoneNumber) {
-        contactsMap.put(name, new Contact(name, phoneNumber));
+        contactsMap.put(name, new ContactEntity(name, phoneNumber));
     }
 
-    public List<Contact> printContact() {
+    public List<ContactEntity> printContact() {
         return contactsMap.entrySet()
                 .stream()
                 .sorted(Map.Entry.comparingByKey())
@@ -30,11 +30,11 @@ public class TelephoneBook {
             contactsMap.remove(name);
     }
 
-    public List<Contact> searchContactByNameOrPhoneNumber(String searchContact) {
+    public List<ContactEntity> searchContactByNameOrPhoneNumber(String searchContact) {
         return contactsMap.values()
                 .stream()
-                .filter(contact -> Integer.toString(contact.getPhoneNumber()).contains(searchContact)
-                        || contact.getName().contains(searchContact))
+                .filter(contactEntity -> Integer.toString(contactEntity.getPhoneNumber()).contains(searchContact)
+                        || contactEntity.getName().contains(searchContact))
                 .collect(Collectors.toList());
     }
 }

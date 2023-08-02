@@ -5,7 +5,7 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class Contact {
+public class ContactEntity {
     private String name;
     private int phoneNumber;
 
