@@ -9,7 +9,7 @@ import java.util.NoSuchElementException;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-class AppOptionsTelephoneBookApp {
+class AppOptionsTest {
 
     @ParameterizedTest
     @ValueSource(ints = {1, 2, 3, 4, 5, 0})
