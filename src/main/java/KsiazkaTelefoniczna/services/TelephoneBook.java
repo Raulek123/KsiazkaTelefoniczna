@@ -3,12 +3,13 @@ package KsiazkaTelefoniczna.services;
 import KsiazkaTelefoniczna.model.ContactEntity;
 import KsiazkaTelefoniczna.exception.NoContactFoundException;
 
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 import java.util.stream.Collectors;
 
-public class TelephoneBook {
+public class TelephoneBook implements Iterable<ContactEntity> {
     private Map<String, ContactEntity> contactsMap = new TreeMap<>();
 
     public void addNewContact(String name, int phoneNumber) {
@@ -36,5 +37,10 @@ public class TelephoneBook {
                 .filter(contactEntity -> Integer.toString(contactEntity.getPhoneNumber()).contains(searchContact)
                         || contactEntity.getName().contains(searchContact))
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public Iterator<ContactEntity> iterator() {
+        return contactsMap.values().iterator();
     }
 }

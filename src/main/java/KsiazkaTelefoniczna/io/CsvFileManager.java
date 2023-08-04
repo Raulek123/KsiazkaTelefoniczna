@@ -4,10 +4,7 @@ import KsiazkaTelefoniczna.exception.DataImportException;
 import KsiazkaTelefoniczna.model.ContactEntity;
 import KsiazkaTelefoniczna.services.TelephoneBook;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 
 public class CsvFileManager implements FileManager {
     private static final String FILE_NAME = "Contacts.csv";
@@ -20,8 +17,13 @@ public class CsvFileManager implements FileManager {
     }
 
     @Override
-    public void exportData(TelephoneBook telephoneBook) {
-
+    public void exportData(TelephoneBook telephoneBook) throws IOException {
+        BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_NAME));
+        for (ContactEntity contact : telephoneBook) {
+            writer.write(contact.toCSV());
+            writer.newLine();
+        }
+        writer.close();
     }
 
     private void importContacts(TelephoneBook telephoneBook) {
