@@ -1,6 +1,7 @@
 package KsiazkaTelefoniczna.Controller;
 
 import KsiazkaTelefoniczna.enums.AppOptions;
+import KsiazkaTelefoniczna.exception.NoContactFoundException;
 import KsiazkaTelefoniczna.io.ConsolePrinter;
 import KsiazkaTelefoniczna.io.CsvFileManager;
 import KsiazkaTelefoniczna.io.Reader;
@@ -13,7 +14,7 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 public class TelephoneBookController {
-    private TelephoneBook teleBook;
+    private final TelephoneBook teleBook;
     private final ConsolePrinter printer = new ConsolePrinter();
     private final Reader reader = new Reader();
     private final CsvFileManager csvFileManager = new CsvFileManager();
@@ -74,8 +75,12 @@ public class TelephoneBookController {
     private void delete() {
         printer.printLine("Podaj nazwę do usunięcia:");
         String name = reader.getString();
-        teleBook.deletingContactByName(name);
-        printer.printLine("Usunięto kontakt");
+        try{
+            teleBook.deletingContactByName(name);
+            printer.printLine("Usunięto kontakt");
+        }catch (NoContactFoundException e){
+            printer.printLine(e.getMessage());
+        }
     }
 
     private void searchByTelephone() {
