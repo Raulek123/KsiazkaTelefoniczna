@@ -7,7 +7,7 @@ import KsiazkaTelefoniczna.services.TelephoneBook;
 import java.io.*;
 
 public class CsvFileManager implements FileManager {
-    private static final String FILE_NAME = "Contacts.csv";
+    private static final String FILE_NAME = "src/main/resources/Contacts.csv";
 
     @Override
     public TelephoneBook importData() {

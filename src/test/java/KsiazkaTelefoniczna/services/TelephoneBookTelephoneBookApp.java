@@ -16,7 +16,7 @@ import java.util.stream.Stream;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-class TelephoneBookTest {
+class TelephoneBookTelephoneBookApp {
 
     @ParameterizedTest
     @ArgumentsSource(MyProvider.class)

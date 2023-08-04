@@ -2,18 +2,25 @@ package KsiazkaTelefoniczna.Controller;
 
 import KsiazkaTelefoniczna.enums.AppOptions;
 import KsiazkaTelefoniczna.io.ConsolePrinter;
+import KsiazkaTelefoniczna.io.CsvFileManager;
 import KsiazkaTelefoniczna.io.Reader;
 import KsiazkaTelefoniczna.model.ContactEntity;
 import KsiazkaTelefoniczna.services.TelephoneBook;
 
+import java.io.IOException;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.NoSuchElementException;
 
 public class TelephoneBookController {
-    private final TelephoneBook teleBook = new TelephoneBook();
+    private TelephoneBook teleBook;
     private final ConsolePrinter printer = new ConsolePrinter();
     private final Reader reader = new Reader();
+    private final CsvFileManager csvFileManager = new CsvFileManager();
+
+    public TelephoneBookController() {
+        teleBook = csvFileManager.importData();
+    }
 
     public void loop() {
         AppOptions option;
@@ -103,7 +110,13 @@ public class TelephoneBookController {
     }
 
     private void closeApp() {
-        printer.printLine("Do zobaczenia!");
         reader.close();
+        try {
+            csvFileManager.exportData(teleBook);
+            printer.printLine("Zapisano zmiany do pliku.");
+        } catch (IOException e){
+            printer.printLine("Nie udało się zapisać zmian do pliku!");
+        }
+        printer.printLine("Do zobaczenia!");
     }
 }
